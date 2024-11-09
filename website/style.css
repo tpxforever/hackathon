@@ -186,8 +186,9 @@ body {
     padding: 20px;
     background-color: #e0e0e0;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
 }
 
 .login-container h1 {
@@ -226,4 +227,17 @@ body {
 
 .login-container button:hover {
     background-color: #333;
+}
+
+body.login-page {
+    background-color: #e0e0e0;
+}
+
+body.dashboard-page {
+    background-color: #e0e0e0;
+}
+
+.dashboard-container{
+    position: relative;
+    top: 50px;
 }
