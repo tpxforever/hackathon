@@ -23,16 +23,16 @@ body {
     margin-top: 15%;
     font-size: 10em;
     opacity: 0;
-    transition: opacity 2s ease-in-out;
+    transition: opacity 1s ease-in-out;
 }
 
 #slogan{
     opacity: 0;
-    margin-top: -5%;
+    margin-top: -7%;
     text-align: center;
     position: relative;
-    transition: opacity 2s ease-in-out;
-    transition-delay: 2s;
+    transition: opacity 1s ease-in-out;
+    transition-delay: 1s;
 }
 
 #test{
@@ -60,20 +60,19 @@ body {
     border-radius: 40px;
     cursor: pointer;
     text-align: center;
-    transition: opacity 2s;
-    transition-delay: 4s;
+    transition: opacity 1s ease, background-color 0.2s ease, color 0.2s ease;
     opacity: 0;
-    pointer-events: none; /* Disable interactions initially */
+    pointer-events: none;
 }
 
 #explore-button.active-button {
-    pointer-events: auto; /* Enable interactions after fade-in */
+    opacity: 1; /* Make visible */
+    pointer-events: auto; /* Enable interactions */
 }
 
-#explore-button.active-button:hover {
+#explore-button:hover {
     background-color: #1f1f1f;
     color: #e0e0e0;
-    transition: background-color 0.2s ease-in-out;
 }
 
 
@@ -104,7 +103,7 @@ body {
 }
 
 #rectangle-bar {
-    position: absolute;
+    position: fixed;
     top: 0px; /* Adjust as needed */
     left: 0;
     width: 0; /* Start with no width */
@@ -113,6 +112,10 @@ body {
     z-index: 2; /* Ensure it appears above other elements */
     opacity: 0;
     transition: opacity 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
 }
 
 @keyframes slideInFromLeft {
@@ -132,13 +135,40 @@ body {
 
 #bar-text {
     position: absolute;
-    top: 10px;
-    left: 20px;
-    font-size: 1.5em;
+    top: 0px;
+    left: 15px;
+    font-size: 3em;
     color: #e0e0e0;
     opacity: 0; /* Start hidden */
+    font-family: "Satoshi";
+    font-weight: bolder;
+    cursor: pointer;
     animation: fadeInText 1s forwards ease;
     animation-delay: 1s; /* Delay to start after bar animation */
+}
+
+#login-button {
+    position: absolute;
+    background-color: #e0e0e0;
+    color: #1f1f1f;
+    top: 10px;
+    left: 1390px;
+    border: none;
+    border-radius: 40px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1.5em;
+    font-family: "Satoshi";
+    font-weight: bolder;
+    opacity: 0;
+    transition: opacity 1s ease, background-color 0.2s ease, color 0.2s ease;
+    pointer-events:none;
+    z-index: 3;
+}
+
+#login-button:hover {
+    background-color: #1f1f1f;
+    color: #e0e0e0;
 }
 
 @keyframes fadeInText {

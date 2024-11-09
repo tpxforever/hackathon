@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,700&display=swap">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <title>Chronos</title>
 </head>
 <body>
@@ -12,13 +13,13 @@
         Chronos
     </h1>
     <h2 class="start-page" id="slogan">Keeping you connected with your past.</h2>
-    <div class="container"></div>
     <div class="container">
-        <button class="explore-button" id="explore-button">Explore</button>
+        <button id="explore-button">Explore</button>
     </div>
     <div id="dot"></div>
     <div id="rectangle-bar">
-        <div id="bar-text">Chronos</div>
+        <div id="bar-text" onclick="location.reload()">Chronos</div>
+        <button id="login-button">Log In</button>
     </div>
     <script src="script.js"></script>
 </body>
