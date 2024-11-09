@@ -8,7 +8,7 @@
 body {
     font-family: "Satoshi", sans-serif;
     background-color: #1f1f1f;
-    overflow-x: hidden;
+    overflow: hidden;
     margin: auto;
     padding: 0;
 }
@@ -51,21 +51,102 @@ body {
 #explore-button {
     display: block;
     padding: 15px 30px;
-    font-size: 1.2em;
+    font-size: 2em;
+    font-family: "Satoshi";
+    font-weight: bolder;
     color: #1f1f1f;
     background-color: #e0e0e0;
     border: none;
-    border-radius: 25px;
+    border-radius: 40px;
     cursor: pointer;
     text-align: center;
-    transition:opacity 2s;
+    transition: opacity 2s;
     transition-delay: 4s;
     opacity: 0;
+    pointer-events: none; /* Disable interactions initially */
 }
-#explore-button:hover {
+
+#explore-button.active-button {
+    pointer-events: auto; /* Enable interactions after fade-in */
+}
+
+#explore-button.active-button:hover {
     background-color: #1f1f1f;
     color: #e0e0e0;
-    transition: background-color 0.2s;
-    transition-timing-function: ease-in-out;
+    transition: background-color 0.2s ease-in-out;
+}
+
+
+@keyframes slideUp {
+    from {
+        transform: translate(-50%, 100%); /* Start below the screen */
+    }
+    to {
+        transform: translate(-50%, -70%); /* Move it far enough to fully cover */
+    }
+}
+
+#dot {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, 100%); /* Initial position below the screen */
+    height: 2000px;
+    width: 2000px;
+    background-color: #e0e0e0;
+    border-radius: 50%;
+    z-index: 1; /* Ensure it covers content */
+    overflow: hidden;
+}
+
+.dot-active {
+    animation: slideUp 2s forwards ease-in-out; /* Slow down the animation */
+}
+
+#rectangle-bar {
+    position: absolute;
+    top: 0px; /* Adjust as needed */
+    left: 0;
+    width: 0; /* Start with no width */
+    height: 70px;
+    background-color: #1f1f1f;
+    z-index: 2; /* Ensure it appears above other elements */
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+@keyframes slideInFromLeft {
+    from {
+        width: 0;
+        opacity: 0;
+    }
+    to {
+        width: 100vw; /* Expand to full width */
+        opacity: 1;
+    }
+}
+
+.rectangle-bar-active {
+    animation: slideInFromLeft 1s forwards ease;
+}
+
+#bar-text {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    font-size: 1.5em;
+    color: #e0e0e0;
+    opacity: 0; /* Start hidden */
+    animation: fadeInText 1s forwards ease;
+    animation-delay: 1s; /* Delay to start after bar animation */
+}
+
+@keyframes fadeInText {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
