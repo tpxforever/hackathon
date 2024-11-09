@@ -44,5 +44,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 1000);
     });
 
+    loginButton.addEventListener("click", () => {
+        window.location.href = "login.html"; // Adjust the path as needed
+    });
     //document.getElementById("login-button").style.opacity = 1;
 });
