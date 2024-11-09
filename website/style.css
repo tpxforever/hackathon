@@ -1,0 +1,71 @@
+@font-face {
+    font-family: "Satoshi";
+    src: url('fonts/Satoshi_Complete/Fonts/TTF/Satoshi-Variable.ttf') format('truetype');
+    font-weight: bolder; /* Define the normal weight here */
+    font-style: normal;  /* Define the normal style here */
+}
+
+body {
+    font-family: "Satoshi", sans-serif;
+    background-color: #1f1f1f;
+    overflow-x: hidden;
+    margin: auto;
+    padding: 0;
+}
+
+.start-page{
+    color: #e0e0e0;
+}
+
+#Chronos{
+    text-align: center;
+    position: relative;
+    margin-top: 15%;
+    font-size: 10em;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+}
+
+#slogan{
+    opacity: 0;
+    margin-top: -5%;
+    text-align: center;
+    position: relative;
+    transition: opacity 2s ease-in-out;
+    transition-delay: 2s;
+}
+
+#test{
+    text-align: center;
+    color: #e0e0e0;
+    position: relative;
+    margin-top: 50%;
+}
+
+.container{
+    display: flex; /* Enables CSS flexbox */
+    justify-content: center;
+    margin-top: 25px;
+}
+
+#explore-button {
+    display: block;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    color: #1f1f1f;
+    background-color: #e0e0e0;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    text-align: center;
+    transition:opacity 2s;
+    transition-delay: 4s;
+    opacity: 0;
+}
+#explore-button:hover {
+    background-color: #1f1f1f;
+    color: #e0e0e0;
+    transition: background-color 0.2s;
+    transition-timing-function: ease-in-out;
+}
+
