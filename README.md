@@ -1,11 +1,14 @@
 # Chronos
 
-Chronos is a web application that enables users to store and share memories through a personalized "capsule" feature. Users can create capsules to store images, text, videos, and share them with friends while customizing the capsule's themes, visibility, and duration. Chronos offers a premium version with additional features such as increased upload limits and extended duration options.
+Chronos is a web based application for users to store their data such as question answers or photos for a specified locked amount of time in our "capsule" system to see how far life has come.
+
+## Disclaimer
+- This program was mainly developed using Mac screen resolution of "2560x1600" due to time constraints, UI may alter on larger resolutions 
 
 ## Project Structure
 
 - **HTML Files**: Define the structure and layout of the pages.
-  - `home.html`: The main landing page.
+  - `index.html`: The main landing page.
   - `dashboard.html`: User dashboard, showing profile, friends, and capsules sections.
   - `login.html`: Login page for user authentication.
 
@@ -17,75 +20,49 @@ Chronos is a web application that enables users to store and share memories thro
 - **CSS Files**:
   - `style.css`: The main stylesheet, providing consistent styling across pages with custom animations and transitions.
 
-- **Backend Files** (Node.js with Express/MongoDB for database connection):
-  - `app.js`: Main server file, initializes the Express app and defines routes.
-  - `dbConfig.js`: Database configuration file for MongoDB connection.
-  - `userController.js`, `userModel.js`, `userRoutes.js`: Handle user-related actions like login, registration, and capsule management.
+- **Backend Files** 
+  - `app.py`: Main server file, initializes the Express app, defines routes as well as manages password encryption for DB.
+  - `main.db`: Database management file for handling user and capsule data
+ 
+## Database Structure
 
-## Features
+- `User`:
+  - id INT PK
+  - username TEXT UNIQUE
+  - password TEXT
 
-1. **Landing Page**: A welcoming page with "Explore" and "Login" options.
-2. **Login Functionality**: 
-   - LocalStorage is used for basic credential storage and retrieval.
-   - Username and password are removed from storage post-login for security.
-3. **Dashboard**:
-   - **Profile Section**: Displays user profile information.
-   - **Friends Section**: Shows friend list and friend request management.
-   - **Capsules Section**: Allows creation, modification, and deletion of capsules.
-4. **Capsules**:
-   - **Themes**: Capsules can have customizable themes.
-   - **Visibility**: Capsules are either private or shared.
-   - **Premium Features**: Increased upload limit, more friends per capsule, longer storage duration.
-
-## Usage
+- `capsule`:
+  - id INT
+  - user.username FK
+  - answer1 TEXT
+  - answer2 TEXT
+  - answer3 TEXT
+  - answer4 TEXT
+  - answer5 TEXT
+  - Expiration_date TEXT
 
 ### Running the Project
-
-1. **Frontend**:
-   - Open the HTML files in your preferred browser.
    
-2. **Backend**:
-   - Navigate to the backend folder and install dependencies:
+1. **Backend**:
+   - Navigate to the command prompt:
      ```bash
-     npm install
+     python3 app.py
      ```
-   - Start the server:
+ 2. **Frontend**:
+   - Navigate to URL:
      ```bash
-     node app.js
+     http://127.0.0.1:5001
      ```
-
-3. **Database**:
-   - MongoDB Atlas is used for database storage, and connection settings are provided in `dbConfig.js`.
 
 ### Testing the Application
 
-- Access the landing page (`home.html`) and explore the basic features.
+- Access the landing page (`index.html`) and explore the basic features.
 - Register or log in with a user account.
 - Create and manage capsules from the dashboard.
 
-## Classes
-
-### User Class
-The `User` class manages the user profile, friend list, and capsules.
-
-#### Key Methods:
-- `addFriend(friendID)`: Sends a friend request.
-- `updatePremium(confirmPurchase)`: Upgrades the user to premium.
-- `processFriendRequest(friendID, friendListPending, friendList, accepted)`: Accepts or rejects a friend request.
-- `removeFriend(friend)`: Removes a friend from the friend list.
-- `getUserInfo()`: Retrieves user information.
-
-### Capsule Class
-The `Capsule` class manages individual capsules, with customizable options for each.
-
-#### Key Methods:
-- `premiumCheck(premium)`: Updates capsule settings for premium users.
-- `addFriendToCapsule(friend, friendList)`: Adds a friend to the capsule’s shared list.
-- `setEndDate(sliderVal)`: Sets the expiration date for the capsule.
-
 ## Animations
 
-The project uses CSS animations to enhance the user experience:
+The project uses CSS & JavaScript animations to enhance the user experience:
 - **Fade In Effects**: Used on buttons, text, and images to create smooth transitions.
 - **Slide-In Sidebar**: The sidebar slides in on the dashboard page load.
 - **Dot Animation**: A circle animation is triggered on the landing page to transition to the dashboard.
@@ -95,10 +72,11 @@ The project uses CSS animations to enhance the user experience:
 The project uses the **Satoshi** font for all headings and buttons, ensuring a clean and modern look. Key styling includes a dark theme, with transitions and hover effects for interactive elements.
 
 ## Dependencies
-
-- **Node.js** and **Express**: Backend framework and server management.
-- **MongoDB Atlas**: Cloud database storage.
 - **FontShare**: External font service for the Satoshi font.
+- **Python Flask**: Backend framework for bridging frontend with DBMS.
+- **SQL lite**: Database managemnt system for storing user data.
+
+
 
 ## Contributing
 
