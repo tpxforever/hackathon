@@ -428,6 +428,9 @@ body.dashboard-page {
 
 .main-text{
     position: absolute;
+    opacity: 0;
+    transition: opacity 1s;
+    transition-delay: 2s;
     top:-5%;
     font-size: 5em;
     z-index: 4;

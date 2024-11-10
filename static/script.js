@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const body = document.body;
     const rectangleBar = document.getElementById("rectangle-bar");
     const loginButton = document.getElementById("login-button");
+    const mainText = document.getElementById("main-text");
 
 
     // Enable button interactions after the initial fade-in delay
@@ -38,6 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
         body.style.backgroundColor = "#e0e0e0";
         body.style.overflow = "auto";
         exploreButton.style.display = "none";
+        mainText.style.opacity = 1;
         rectangleBar.classList.add("rectangle-bar-active");
         document.getElementById("dot").style.opacity = 0;
         setTimeout(() => {
