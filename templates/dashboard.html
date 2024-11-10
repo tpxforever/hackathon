@@ -3,23 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="static/style.css">
     <title>Dashboard</title>
 </head>
-<body class="dashboard-page">
+<body id="dashboard" class="dashboard-page">
     <div id="rectangle-bar">
         <div id="bar-text" onclick="location.reload()">Chronos • Dashboard</div>
     </div>
     <div id="sidebar" class="sidebar">
         <ul>
-            <li id="name-section">Profile</li>
-            <li id="friends-section">Friends</li>
             <li id="capsules-section">Capsules</li>
         </ul>
     </div>
     <div class="start-section">
         <div id="Welcome">Welcome to Chronos</div>
+        <div id="username1"></div>
+        <button type="capsule-button"> Create Capsule</button>
+        <div id="capsule-content" style="display: none;"></div>
     </div>
-    <script src="dashboard.js"></script>
+    <script src="static/dashboard.js"></script>
 </body>
 </html>

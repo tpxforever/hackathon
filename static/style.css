@@ -291,4 +291,85 @@ body.dashboard-page {
     opacity: 0;
     transition: opacity 1s ease;
     transition-delay: 2s;
+    color: #1f1f1f;
+}
+
+#profile-display {
+    margin-top: 200px;
+    left: 500px;
+    padding: 10px;
+    background-color: #e0e0e0;
+    border: none;
+    display: none;
+}
+
+#username1{
+    position: fixed;
+    font-size: 5em;
+    margin-top: 300px;
+    left: 700px;
+    opacity: 0;
+    transition: opacity 1s ease;
+    transition-delay: 2s;
+    color: #1f1f1f;
+}
+
+#create-capsule{
+    position: fixed;
+    font-size: 3em;
+    margin-top: 100px;
+    left: 300px;
+    opacity: 1;
+    background-color: #1f1f1f;
+    cursor: pointer;
+    color: #e0e0e0;
+    border-radius: 60px;
+    padding: 20px;
+    border: 0px solid #ccc;
+    font-family: "Satoshi", sans-serif;
+    font-weight: bold;
+
+}
+
+.start-section{
+    font-family: "Satoshi", sans-serif;
+    font-weight: bold;
+    
+}
+
+#capsule-form{
+    position: fixed;
+    font-size: 2em;
+    margin-top: 100px;
+    left: 300px;
+}
+
+#capsule-content {
+    display: flex;           
+    flex-wrap: wrap;         
+    gap: 20px;             
+    justify-content: flex-start;
+}
+
+.capsule-item {
+    position: relative;
+    font-size: 2em;
+    margin-top: 100px;
+    left: 300px;
+    background-color: #f3f3f3;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    width: 200px;
+}
+
+#capsule-button{
+    position: fixed;
+    font-size: 3em;
+    margin-top: 100px;
+    left: 300px;
+    background-color: #f3f3f3;
+    padding: 15px;
+    border-radius: 8px;
+    width: 200px;
 }
