@@ -245,19 +245,19 @@ function showCapsuleForm() {
     capsuleContent.innerHTML = `
         <form id="capsule-form">
             <label>Question 1: What is your favorite memory?</label>
-            <input type="text" name="answer1" required><br><br>
+            <input class="ans" type="text" name="answer1" required><br><br>
 
             <label>Question 2: Where would you like to travel?</label>
-            <input type="text" name="answer2" required><br><br>
+            <input class="ans" type="text" name="answer2" required><br><br>
 
             <label>Question 3: What are your future goals?</label>
-            <input type="text" name="answer3" required><br><br>
+            <input class="ans" type="text" name="answer3" required><br><br>
 
             <label>Question 4: Who has influenced you the most?</label>
-            <input type="text" name="answer4" required><br><br>
+            <input class="ans" type="text" name="answer4" required><br><br>
 
             <label>Question 5: Describe a challenging experience you overcame.</label>
-            <input type="text" name="answer5" required><br><br>
+            <input class="ans" type="text" name="answer5" required><br><br>
 
             <label for="timer">Choose Timer Duration:</label>
             <select id="timer" name="timer" required>

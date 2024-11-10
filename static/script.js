@@ -37,11 +37,14 @@ document.addEventListener("DOMContentLoaded", () => {
     dot.addEventListener("animationend", () => {
         body.style.backgroundColor = "#e0e0e0";
         body.style.overflow = "auto";
+        exploreButton.style.display = "none";
         rectangleBar.classList.add("rectangle-bar-active");
+        document.getElementById("dot").style.opacity = 0;
         setTimeout(() => {
             loginButton.style.opacity = 1; // Trigger fade-in for login button
             loginButton.style.pointerEvents = "all";
         }, 1000);
+
     });
 
     loginButton.addEventListener("click", () => {
