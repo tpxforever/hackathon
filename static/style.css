@@ -436,3 +436,30 @@ body.dashboard-page {
     z-index: 4;
     color: #1f1f1f;
 }
+
+img{
+    position: fixed;
+    margin-top: 700px;
+    left: 1000px;
+    width: 400px;
+    animation: slideUp;
+}
+
+
+.img-active {
+    animation: slideUp2 2s forwards ease-in-out; /* Slow down the animation */
+    animation-delay: 2s;
+}
+
+#text-2{
+    position: absolute;
+    margin-top:-70px;
+}
+@keyframes slideUp2 {
+    from {
+        transform: translate(0px, 0px); /* Start below the screen */
+    }
+    to {
+        transform: translate(0px, -950px); /* Move it far enough to fully cover */
+    }
+}

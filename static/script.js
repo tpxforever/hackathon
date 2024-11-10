@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const rectangleBar = document.getElementById("rectangle-bar");
     const loginButton = document.getElementById("login-button");
     const mainText = document.getElementById("main-text");
+    const chronosImg = document.getElementById("chronos-image");
 
 
     // Enable button interactions after the initial fade-in delay
@@ -37,10 +38,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     dot.addEventListener("animationend", () => {
         body.style.backgroundColor = "#e0e0e0";
-        body.style.overflow = "auto";
         exploreButton.style.display = "none";
         mainText.style.opacity = 1;
         rectangleBar.classList.add("rectangle-bar-active");
+        chronosImg.classList.add("img-active");
         document.getElementById("dot").style.opacity = 0;
         setTimeout(() => {
             loginButton.style.opacity = 1; // Trigger fade-in for login button
