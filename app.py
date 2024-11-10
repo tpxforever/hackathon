@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for
+from datetime import datetime, timedelta
 import sqlite3
 import bcrypt
 
@@ -35,12 +36,22 @@ def save_capsule():
     question3 = data['question3']
     question4 = data['question4']
     question5 = data['question5']
+    timer = data['timer']
+
+    if timer == "5_seconds":
+        expiration_date = datetime.now() + timedelta(seconds=5)
+    elif timer == "1_year":
+        expiration_date = datetime.now() + timedelta(days=365)
+    elif timer == "5_years":
+        expiration_date = datetime.now() + timedelta(days=5*365)
+    else:
+        expiration_date = None
 
     conn = get_db_connection()
     conn.execute('''
-        INSERT INTO capsules (username, question1, question2, question3, question4, question5)
-        VALUES (?, ?, ?, ?, ?, ?)
-    ''', (username, question1, question2, question3, question4, question5))
+        INSERT INTO capsules (username, question1, question2, question3, question4, question5, expiration_date)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
+    ''', (username, question1, question2, question3, question4, question5, expiration_date))
     conn.commit()
     conn.close()
 
@@ -56,7 +67,8 @@ def get_capsules():
 
     # Convert each capsule row to a dictionary
     capsules_list = [{'id': row['id'], 'question1': row['question1'], 'question2': row['question2'],
-                      'question3': row['question3'], 'question4': row['question4'], 'question5': row['question5']}
+                      'question3': row['question3'], 'question4': row['question4'], 'question5': row['question5'],
+                      'expiration_date': row['expiration_date']}
                      for row in capsules]
 
     return jsonify({'capsules': capsules_list})
@@ -115,7 +127,8 @@ if __name__ == '__main__':
             question2 TEXT,
             question3 TEXT,
             question4 TEXT,
-            question5 TEXT
+            question5 TEXT,
+            expiration_date TEXT
         )
     ''')
     conn.commit()
