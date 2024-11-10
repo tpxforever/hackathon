@@ -109,7 +109,7 @@ body {
     width: 0; /* Start with no width */
     height: 70px;
     background-color: #1f1f1f;
-    z-index: 2; /* Ensure it appears above other elements */
+    z-index: 3; /* Ensure it appears above other elements */
     opacity: 0;
     transition: opacity 0.5s ease;
     display: flex;
@@ -235,6 +235,8 @@ body.login-page {
 
 body.dashboard-page {
     background-color: #e0e0e0;
+    overflow-y: hidden;
+    overflow-x: scroll;
 }
 
 .dashboard-container{
@@ -256,6 +258,7 @@ body.dashboard-page {
     padding-top: 20px;
     transform: translateY(-100%); /* Start hidden above viewport */
     transition: transform 1s ease; /* Smooth slide-down animation */
+    z-index: 2;
 }
 
 .sidebar-visible {
@@ -354,13 +357,16 @@ body.dashboard-page {
 .capsule-item {
     position: relative;
     font-size: 2em;
+    height: 45vw;
     margin-top: 100px;
     left: 300px;
     background-color: #f3f3f3;
     padding: 15px;
     border-radius: 8px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    width: 200px;
+    width: 30vw;
+    transition: all 0.3s ease;
+    z-index: 1;
 }
 
 #capsule-button{
@@ -383,4 +389,32 @@ body.dashboard-page {
 #capsule-button:hover {
     background-color: #1f1f1f;
     color: #e0e0e0;
+}
+
+/* Expanded capsule styling */
+.capsule-item.expanded {
+    width: 75vw;
+    height: 45vw;
+    word-wrap: break-word; /* Allows long words to wrap */
+    overflow-wrap: break-word; /* Breaks long words at the container edge */
+    white-space: normal;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    position: relative;
+}
+
+/* Close button styling */
+.capsule-answers .close-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #1f1f1f;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }

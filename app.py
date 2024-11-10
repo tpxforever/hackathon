@@ -31,11 +31,11 @@ def init_db():
 def save_capsule():
     data = request.get_json()
     username = data['username']
-    question1 = data['question1']
-    question2 = data['question2']
-    question3 = data['question3']
-    question4 = data['question4']
-    question5 = data['question5']
+    answer1 = data['answer1']
+    answer2 = data['answer2']
+    answer3 = data['answer3']
+    answer4 = data['answer4']
+    answer5 = data['answer5']
     timer = data['timer']
 
     if timer == "5_seconds":
@@ -49,9 +49,9 @@ def save_capsule():
 
     conn = get_db_connection()
     conn.execute('''
-        INSERT INTO capsules (username, question1, question2, question3, question4, question5, expiration_date)
+        INSERT INTO capsules (username, answer1, answer2, answer3, answer4, answer5, expiration_date)
         VALUES (?, ?, ?, ?, ?, ?, ?)
-    ''', (username, question1, question2, question3, question4, question5, expiration_date))
+    ''', (username, answer1, answer2, answer3, answer4, answer5, expiration_date))
     conn.commit()
     conn.close()
 
@@ -66,8 +66,8 @@ def get_capsules():
     conn.close()
 
     # Convert each capsule row to a dictionary
-    capsules_list = [{'id': row['id'], 'question1': row['question1'], 'question2': row['question2'],
-                      'question3': row['question3'], 'question4': row['question4'], 'question5': row['question5'],
+    capsules_list = [{'id': row['id'], 'answer1': row['answer1'], 'answer2': row['answer2'],
+                      'answer3': row['answer3'], 'answer4': row['answer4'], 'answer5': row['answer5'],
                       'expiration_date': row['expiration_date']}
                      for row in capsules]
 
@@ -117,17 +117,17 @@ def dashboard():
 
 # Initialize the database and run the server
 if __name__ == '__main__':
-    # Ensure the 'capsules' table exists with five questions
+    # Ensure the 'capsules' table exists with five answers
     conn = get_db_connection()
     conn.execute('''
         CREATE TABLE IF NOT EXISTS capsules (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             username TEXT,
-            question1 TEXT,
-            question2 TEXT,
-            question3 TEXT,
-            question4 TEXT,
-            question5 TEXT,
+            answer1 TEXT,
+            answer2 TEXT,
+            answer3 TEXT,
+            answer4 TEXT,
+            answer5 TEXT,
             expiration_date TEXT
         )
     ''')

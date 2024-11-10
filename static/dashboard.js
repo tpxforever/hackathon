@@ -80,54 +80,100 @@ function addCapsuleStyle(index) {
 }
 
 function generateCapsuleElement(capsule, index) {
+    const questions = [
+        "What is your favorite memory?",
+        "Where would you like to travel?",
+        "What are your future goals?",
+        "Who has influenced you the most?",
+        "Describe a challenging experience you overcame."
+    ];    
     const capsuleDiv = document.createElement("div");
     capsuleDiv.id = `capsule-${index}`;
     capsuleDiv.classList.add("capsule-item");
+    capsuleDiv.setAttribute("data-expired", "false"); // Track expired state for each capsule
 
     // Display the capsule title
     capsuleDiv.innerHTML = `<h3>Capsule ${index + 1}</h3>`;
-    
+
     // Timer display
     const timerDiv = document.createElement("div");
     timerDiv.classList.add("capsule-timer");
     capsuleDiv.appendChild(timerDiv);
 
-    let isExpired = false;
+    let isExpired = false; // Track if this capsule is expired
 
-    // Check and start countdown if expiration_date exists
+    // Start countdown and set data-expired attribute when expired
     if (capsule.expiration_date) {
         console.log(`Starting countdown for Capsule ${index + 1} with expiration: ${capsule.expiration_date}`);
         startCountdown(timerDiv, capsule.expiration_date, () => {
-            isExpired = true; // Set flag to true once expired
+            isExpired = true;
+            capsuleDiv.setAttribute("data-expired", "true"); // Mark as expired
         });
     } else {
         console.warn(`No expiration date found for Capsule ${index + 1}`);
         timerDiv.textContent = "No expiration date set";
     }
 
-    // Answers section (initially hidden)
+    // Answers section with questions (initially hidden)
     const answersDiv = document.createElement("div");
     answersDiv.classList.add("capsule-answers");
+    answersDiv.id = `answers-${index}`; // Unique ID for each capsule’s answers
     answersDiv.style.display = "none";
     answersDiv.innerHTML = `
-        <p>Question 1: ${capsule.question1}</p>
-        <p>Question 2: ${capsule.question2}</p>
-        <p>Question 3: ${capsule.question3}</p>
-        <p>Question 4: ${capsule.question4}</p>
-        <p>Question 5: ${capsule.question5}</p>
+        <p><strong>Question 1:</strong> ${questions[0]} <br><strong>Answer:</strong> ${capsule.answer1}</p>
+        <p><strong>Question 2:</strong> ${questions[1]} <br><strong>Answer:</strong> ${capsule.answer2}</p>
+        <p><strong>Question 3:</strong> ${questions[2]} <br><strong>Answer:</strong> ${capsule.answer3}</p>
+        <p><strong>Question 4:</strong> ${questions[3]} <br><strong>Answer:</strong> ${capsule.answer4}</p>
+        <p><strong>Question 5:</strong> ${questions[4]} <br><strong>Answer:</strong> ${capsule.answer5}</p>
+        <button class="close-button">Close</button>
     `;
     capsuleDiv.appendChild(answersDiv);
 
-    // Toggle answers visibility on click only if expired
-    capsuleDiv.addEventListener("click", () => {
+    // Click event to expand only if expired
+    capsuleDiv.addEventListener("click", (event) => {
+        event.stopPropagation(); // Prevents affecting other elements
+        const isExpired = capsuleDiv.getAttribute("data-expired") === "true";
         if (isExpired) {
-            answersDiv.style.display = answersDiv.style.display === "none" ? "block" : "none";
+            expandCapsule(capsuleDiv, answersDiv); // Expand this capsule
         } else {
             alert("This capsule is not yet available.");
         }
     });
 
     return capsuleDiv;
+}
+
+// Function to expand a capsule and hide others
+function expandCapsule(capsuleDiv, answersDiv) {
+    // Hide all other capsules
+    document.querySelectorAll(".capsule-item").forEach(capsule => {
+        if (capsule !== capsuleDiv) {
+            capsule.style.display = "none";
+        }
+    });
+
+    // Expand the selected capsule
+    capsuleDiv.classList.add("expanded"); // Add a CSS class for styling the expanded capsule
+    answersDiv.style.display = "block"; // Show answers section
+
+    // Add event listener to close button
+    const closeButton = answersDiv.querySelector(".close-button");
+    closeButton.addEventListener("click", (event) => {
+        event.stopPropagation();
+        collapseCapsule(capsuleDiv, answersDiv); // Collapse back to normal view
+    });
+}
+
+// Function to collapse the expanded capsule and show all capsules again
+function collapseCapsule(capsuleDiv, answersDiv) {
+    // Show all other capsules
+    document.querySelectorAll(".capsule-item").forEach(capsule => {
+        capsule.style.display = "block";
+    });
+
+    // Collapse the expanded capsule
+    capsuleDiv.classList.remove("expanded"); // Remove the expanded class
+    answersDiv.style.display = "none"; // Hide answers section
 }
 
 
@@ -142,9 +188,9 @@ function startCountdown(timerDiv, expirationDate, onExpireCallback) {
         const timeRemaining = expiration - now;
 
         if (timeRemaining <= 0) {
-            timerDiv.textContent = "Expired";
+            timerDiv.textContent = "Unlocked";
             clearInterval(intervalId); // Stop the countdown when expired
-            onExpireCallback(); // Trigger the callback to mark as expired
+            onExpireCallback(); // Call the expiration callback
             return;
         }
 
@@ -159,7 +205,6 @@ function startCountdown(timerDiv, expirationDate, onExpireCallback) {
     intervalId = setInterval(updateTimer, 1000); // Update every second
     updateTimer(); // Initial immediate update
 }
-
 
 
 async function fetchCapsules(username) {
@@ -200,19 +245,19 @@ function showCapsuleForm() {
     capsuleContent.innerHTML = `
         <form id="capsule-form">
             <label>Question 1: What is your favorite memory?</label>
-            <input type="text" name="question1" required><br><br>
+            <input type="text" name="answer1" required><br><br>
 
             <label>Question 2: Where would you like to travel?</label>
-            <input type="text" name="question2" required><br><br>
+            <input type="text" name="answer2" required><br><br>
 
             <label>Question 3: What are your future goals?</label>
-            <input type="text" name="question3" required><br><br>
+            <input type="text" name="answer3" required><br><br>
 
             <label>Question 4: Who has influenced you the most?</label>
-            <input type="text" name="question4" required><br><br>
+            <input type="text" name="answer4" required><br><br>
 
             <label>Question 5: Describe a challenging experience you overcame.</label>
-            <input type="text" name="question5" required><br><br>
+            <input type="text" name="answer5" required><br><br>
 
             <label for="timer">Choose Timer Duration:</label>
             <select id="timer" name="timer" required>
@@ -233,11 +278,11 @@ async function submitCapsuleForm(event) {
     event.preventDefault();
 
     const username = localStorage.getItem("username");
-    const question1 = document.querySelector('input[name="question1"]').value;
-    const question2 = document.querySelector('input[name="question2"]').value;
-    const question3 = document.querySelector('input[name="question3"]').value;
-    const question4 = document.querySelector('input[name="question4"]').value;
-    const question5 = document.querySelector('input[name="question5"]').value;
+    const answer1 = document.querySelector('input[name="answer1"]').value;
+    const answer2 = document.querySelector('input[name="answer2"]').value;
+    const answer3 = document.querySelector('input[name="answer3"]').value;
+    const answer4 = document.querySelector('input[name="answer4"]').value;
+    const answer5 = document.querySelector('input[name="answer5"]').value;
     const timer = document.querySelector('select[name="timer"]').value;
 
     try {
@@ -248,11 +293,11 @@ async function submitCapsuleForm(event) {
             },
             body: JSON.stringify({
                 username: username,
-                question1: question1,
-                question2: question2,
-                question3: question3,
-                question4: question4,
-                question5: question5,
+                answer1: answer1,
+                answer2: answer2,
+                answer3: answer3,
+                answer4: answer4,
+                answer5: answer5,
                 timer: timer
             })
         });
